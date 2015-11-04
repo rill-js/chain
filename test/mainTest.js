@@ -5,17 +5,17 @@ describe("Chain", function () {
 	it("should work", function (done) {
 		var result     = [];
 		var middleware = [
-			function first (req, res, next) {
+			function first (ctx, next) {
 				result.push(1);
 				next();
 				result.push(6);
 			},
-			function second (req, res, next) {
+			function second (ctx, next) {
 				result.push(2);
 				next();
 				result.push(5);
 			},
-			function third (req, res, next) {
+			function third (ctx, next) {
 				result.push(3);
 				next();
 				result.push(4);
@@ -33,15 +33,15 @@ describe("Chain", function () {
 	it("should stop the chain without calling next", function (done) {
 		var result     = [];
 		var middleware = [
-			function first (req, res, next) {
+			function first (ctx, next) {
 				result.push(1);
 				next();
 				result.push(6);
 			},
-			function second (req, res, next) {
+			function second (ctx, next) {
 				result.push(2);
 			},
-			function third (req, res, next) {
+			function third (ctx, next) {
 				result.push(3);
 				next();
 				result.push(4);

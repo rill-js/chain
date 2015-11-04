@@ -1,6 +1,6 @@
 {
   "name": "@rill/chain",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Chain a series of functions and return a promise.",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "main": "index.js",

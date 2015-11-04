@@ -18,20 +18,20 @@ var stack = [];
 
 // regular functions that return anything
 // but they will be resolved as promises.
-stack.push(function (req, res, next) {
+stack.push(function (ctx, next) {
   return Promise.resolve(true);
 });
 
 // async/await functions
-stack.push(async function (req, res, next) {
-  return await Promise.resolve(true);
+stack.push(async function (ctx, next) {
+  await Promise.resolve(true);
 });
 
 // compose it into a function
 var fn = chain(stack);
 
 // this function returns a promise
-fn.call(this).catch(function (err) {
+fn({}).catch(function (err) {
   console.error(err.stack);
   process.exit(1);
 })
