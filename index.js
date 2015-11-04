@@ -19,7 +19,9 @@ function chain (fns) {
 
 			if (!fn) return Promise.resolve();
 			try {
-				return Promise.resolve(fn(ctx, function next () { dispatch(i + 1); }));
+				return Promise.resolve(fn(ctx, function next () {
+					return dispatch(i + 1);
+				}));
 			}
 			catch (err) {
 				return Promise.reject(err);
