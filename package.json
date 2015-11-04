@@ -6,7 +6,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DylanPiercey/q-flat"
+    "url": "https://github.com/rill-js/chain"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
