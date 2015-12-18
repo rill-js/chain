@@ -1,3 +1,4 @@
+"use strict";
 module.exports = chain;
 
 /**
@@ -14,8 +15,8 @@ function chain (fns) {
 		function dispatch (i) {
 			if (i <= index) return Promise.reject(new Error("next() called multiple times"));
 
-			index = i;
-			fn    = fns[i] || next;
+			var fn = fns[i] || next;
+			index  = i;
 
 			if (!fn) return Promise.resolve();
 			try {
