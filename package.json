@@ -1,7 +1,7 @@
 {
   "name": "@rill/chain",
-  "version": "0.2.2",
-  "description": "Chain a series of functions and return a promise.",
+  "version": "1.0.0",
+  "description": "Compose middleware for Rill.",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "main": "index.js",
   "repository": {

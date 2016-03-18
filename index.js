@@ -7,18 +7,19 @@ module.exports = chain;
  * @param {Array<Function>}
  * @return {Function}
  */
-function chain (fns) {
-	validate(fns);
+function chain (stack) {
+	if (!Array.isArray(stack)) throw new TypeError("Rill: Middleware stack must be an array.");
+	var fns = normalize(stack, []);
+
 	return function chained (ctx, next) {
 		var index = -1; // Last called middleware.
 		return dispatch(0);
 		function dispatch (i) {
-			if (i <= index) return Promise.reject(new Error("next() called multiple times"));
+			if (i <= index) return Promise.reject(new Error("Rill: next() called multiple times."));
 
 			var fn = fns[i] || next;
 			index  = i;
 
-			if (!fn) return Promise.resolve();
 			try {
 				return Promise.resolve(fn(ctx, function next () {
 					return dispatch(i + 1);
@@ -32,17 +33,22 @@ function chain (fns) {
 }
 
 /**
- * Utility to validate that a middleware stack is an array of functions.
+ * Utility to normalize a middleware stack and check for validity.
  *
  * @param {Array<Function>}
  * @throws {TypeError}
  */
-function validate (fns) {
-	if (!Array.isArray(fns))
-		throw new TypeError("Middleware stack must be an array!");
+function normalize (stack, fns) {
+	var len = stack.length, fn;
 
-	for (var i = fns.length; i--;) {
-		if (typeof fns[i] !== "function")
-			throw new TypeError("Middleware must be composed of functions!");
+	for (var i = 0; i < len; i++) {
+		fn = stack[i];
+		if (!fn) continue;
+		else if (typeof fn === "function") fns.push(fn);
+		else if (Array.isArray(fn)) normalize(fn, fns);
+		else if (Array.isArray(fn.stack)) normalize(fn.stack, fns);
+		else throw new TypeError("Rill: Middleware must be an functions. Got a [" + fn.constructor.name + "].");
 	}
+
+	return fns;
 }
