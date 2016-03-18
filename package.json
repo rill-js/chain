@@ -1,6 +1,6 @@
 {
   "name": "@rill/chain",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Compose middleware for Rill.",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "main": "index.js",

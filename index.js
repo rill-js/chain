@@ -20,6 +20,10 @@ function chain (stack) {
 			var fn = fns[i] || next;
 			index  = i;
 
+			if (!fn) {
+				return Promise.resolve();
+			}
+
 			try {
 				return Promise.resolve(fn(ctx, function next () {
 					return dispatch(i + 1);
@@ -40,7 +44,6 @@ function chain (stack) {
  */
 function normalize (stack, fns) {
 	var len = stack.length, fn;
-
 	for (var i = 0; i < len; i++) {
 		fn = stack[i];
 		if (!fn) continue;
