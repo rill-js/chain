@@ -1,6 +1,6 @@
 {
   "name": "@rill/chain",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "browser": "client/index.js",
   "bugs": "https://github.com/rill-js/chain/issues",
