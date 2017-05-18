@@ -1,14 +1,14 @@
 {
   "name": "@rill/chain",
   "description": "Compose all functions and Rill apps provided into a valid middleware.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "browser": "client/index.js",
   "bugs": "https://github.com/rill-js/chain/issues",
   "devDependencies": {
-    "mocha": "^3.0.2",
-    "snazzy": "^3.0.0",
-    "standard": "^6.0.8"
+    "mocha": "^3.4.1",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.2"
   },
   "homepage": "https://github.com/rill-js/chain",
   "keywords": [

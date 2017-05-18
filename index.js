@@ -50,7 +50,7 @@ function normalize (stack, fns) {
     else if (typeof fn === 'function') fns.push(fn)
     else if (Array.isArray(fn)) normalize(fn, fns)
     else if (Array.isArray(fn.stack)) normalize(fn.stack, fns)
-    else throw new TypeError('Rill: Middleware must be an functions. Got a [' + fn.constructor.name + '].')
+    else throw new TypeError('Rill: Invalid middleware provided. Got a [' + fn.constructor.name + '].')
   }
 
   return fns
