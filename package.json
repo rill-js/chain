@@ -5,6 +5,9 @@
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "browser": "client/index.js",
   "bugs": "https://github.com/rill-js/chain/issues",
+  "dependencies": {
+    "just-extend": "^1.1.22"
+  },
   "devDependencies": {
     "@types/es6-promise": "0.0.33",
     "@types/mocha": "^2.2.43",
@@ -54,8 +57,5 @@
     "test": "nyc --extension=.ts --include=src/**/*.ts --reporter=lcov --reporter=text-summary npm run mocha",
     "test-ci": "nyc --extension=.ts --include=src/**/*.ts --reporter=lcovonly --reporter=text npm run mocha"
   },
-  "types": "dist/index.d.ts",
-  "dependencies": {
-    "just-extend": "^1.1.22"
-  }
+  "types": "dist/index.d.ts"
 }
