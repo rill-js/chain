@@ -3,6 +3,8 @@ import * as T from "./_types";
 
 /**
  * Chain a stack of rill middleware into one composed function.
+ *
+ * @param stack An array of middleware arguments to convert to a function. 
  */
 export default function chain(stack: T.Stack) {
   if (!Array.isArray(stack)) {
@@ -32,7 +34,9 @@ export default function chain(stack: T.Stack) {
 }
 
 /**
- * Utility to normalize a middleware stack and check for validity.
+ * Utility to (recursively) normalize a middleware stack and check for validity.
+ * @param stack An array of middleware arguments to convert to a function. 
+ * @param fns The current list of normalized middleware functions.
  * @internal
  */
 function normalize(

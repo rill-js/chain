@@ -5,7 +5,6 @@
   @rill/chain
 	<br/>
 
-
   <!-- Stability -->
   <a href="https://nodejs.org/api/documentation.html#documentation_stability_index">
     <img src="https://img.shields.io/badge/stability-stable-brightgreen.svg" alt="API Stability"/>
@@ -40,7 +39,7 @@
   </a>
 </h1>
 
-This module is used internally by Rill but is extracted from convenience.
+This module is used internally by Rill but is extracted for convenience.
 Composes all functions and Rill apps provided into a valid middleware function that returns a promise.
 
 # Installation
