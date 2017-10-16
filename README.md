@@ -5,28 +5,42 @@
   @rill/chain
 	<br/>
 
+
   <!-- Stability -->
   <a href="https://nodejs.org/api/documentation.html#documentation_stability_index">
-    <img src="https://img.shields.io/badge/stability-stable-brightgreen.svg?style=flat-square" alt="API stability"/>
+    <img src="https://img.shields.io/badge/stability-stable-brightgreen.svg" alt="API Stability"/>
   </a>
-  <!-- Standard -->
-  <a href="https://github.com/feross/standard">
-    <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square" alt="Standard"/>
+  <!-- TypeScript -->
+  <a href="http://typescriptlang.org">
+    <img src="https://img.shields.io/badge/%3C%2F%3E-typescript-blue.svg" alt="TypeScript"/>
+  </a>
+  <!-- Prettier -->
+  <a href="https://github.com/prettier/prettier">
+    <img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg" alt="Styled with prettier"/>
+  </a>
+  <!-- Travis build -->
+  <a href="https://travis-ci.org/rill-js/@rill/chain">
+  <img src="https://img.shields.io/travis/rill-js/@rill/chain.svg" alt="Build status"/>
+  </a>
+  <!-- Coveralls coverage -->
+  <a href="https://coveralls.io/github/rill-js/@rill/chain">
+    <img src="https://img.shields.io/coveralls/rill-js/@rill/chain.svg" alt="Test Coverage"/>
   </a>
   <!-- NPM version -->
   <a href="https://npmjs.org/package/@rill/chain">
-    <img src="https://img.shields.io/npm/v/@rill/chain.svg?style=flat-square" alt="NPM version"/>
+    <img src="https://img.shields.io/npm/v/@rill/chain.svg" alt="NPM Version"/>
   </a>
   <!-- Downloads -->
   <a href="https://npmjs.org/package/@rill/chain">
-    <img src="https://img.shields.io/npm/dm/@rill/chain.svg?style=flat-square" alt="Downloads"/>
+    <img src="https://img.shields.io/npm/dm/@rill/chain.svg" alt="Downloads"/>
   </a>
-  <!-- Gitter Chat -->
-  <a href="https://gitter.im/rill-js/rill">
-    <img src="https://img.shields.io/gitter/room/rill-js/rill.svg?style=flat-square" alt="Gitter Chat"/>
+  <!-- Size -->
+  <a href="https://npmjs.org/package/@rill/chain">
+    <img src="https://img.shields.io/badge/size-766b-green.svg" alt="Browser Bundle Size"/>
   </a>
 </h1>
 
+This module is used internally by Rill but is extracted from convenience.
 Composes all functions and Rill apps provided into a valid middleware function that returns a promise.
 
 # Installation
@@ -38,34 +52,34 @@ npm install @rill/chain
 # Example
 
 ```javascript
-var chain = require('@rill/chain')
+import chain from "@rill/chain";
 
-var stack = []
+const stack = [];
 
-// regular functions that return anything
+// Regular functions that return anything
 // but they will be resolved as promises.
 stack.push((ctx, next)=> {
-  return Promise.resolve(true)
+  return Promise.resolve(true);
 })
 
-// async/await functions
+// Async/await functions
 stack.push(async (ctx, next)=> {
   await Promise.resolve(true);
-})
+});
 
 // Other apps.
-const app = require('rill')()
-app.use(...)
-stack.push(app)
+const app = new Rill();
+app.use(...);
+stack.push(app);
 
-// compose it into a function
-var fn = chain(stack)
+// Compose it into a function (returns a promise).
+const fn = chain(stack)
 
-// this function returns a promise
+// Call the function with a context.
 fn({}).catch((err)=> {
-  console.error(err.stack)
-  process.exit(1)
-})
+  console.error(err.stack);
+  process.exit(1);
+});
 ```
 
 ### Contributions
