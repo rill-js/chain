@@ -1,6 +1,8 @@
 import * as extend from "just-extend";
 import * as T from "./_types";
 
+export { T as Types };
+
 /**
  * Chain a stack of rill middleware into one composed function.
  *
