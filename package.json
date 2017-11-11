@@ -3,25 +3,21 @@
   "description": "Compose all functions and Rill apps provided into a valid middleware.",
   "version": "1.0.7",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
-  "browser": "client/index.js",
   "bugs": "https://github.com/rill-js/chain/issues",
-  "dependencies": {
-    "just-extend": "^1.1.22"
-  },
   "devDependencies": {
     "@types/es6-promise": "0.0.33",
-    "@types/mocha": "^2.2.43",
-    "@types/node": "^8.0.34",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.51",
     "coveralls": "^3.0.0",
     "husky": "^0.14.3",
-    "lint-staged": "^4.2.3",
-    "mocha": "^3.4.1",
-    "nyc": "^11.2.1",
-    "prettier": "^1.7.4",
+    "lint-staged": "^5.0.0",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "prettier": "^1.8.2",
     "ts-node": "^3.3.0",
-    "tslint": "^5.7.0",
-    "tslint-config-prettier": "^1.5.0",
-    "typescript": "^2.5.3"
+    "tslint": "^5.8.0",
+    "tslint-config-prettier": "^1.6.0",
+    "typescript": "^2.6.1"
   },
   "files": [
     "dist"

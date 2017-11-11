@@ -1,14 +1,15 @@
-import * as extend from "just-extend";
 import * as T from "./_types";
 
-export { T as Types };
+module.exports = exports = chain;
+export default chain;
+export const Types = T;
 
 /**
  * Chain a stack of rill middleware into one composed function.
  *
- * @param stack An array of middleware arguments to convert to a function. 
+ * @param stack An array of middleware arguments to convert to a function.
  */
-export default function chain(stack: T.Stack) {
+function chain(stack: T.Stack) {
   if (!Array.isArray(stack)) {
     throw new TypeError("Rill: Middleware stack must be an array.");
   }
@@ -37,7 +38,7 @@ export default function chain(stack: T.Stack) {
 
 /**
  * Utility to (recursively) normalize a middleware stack and check for validity.
- * @param stack An array of middleware arguments to convert to a function. 
+ * @param stack An array of middleware arguments to convert to a function.
  * @param fns The current list of normalized middleware functions.
  * @internal
  */
@@ -67,5 +68,3 @@ function normalize(
 
   return fns;
 }
-
-module.exports = extend(exports.default, exports);
