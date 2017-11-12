@@ -1,22 +1,34 @@
-import * as T from "./_types";
-
+// Support commonjs
 module.exports = exports = chain;
-export default chain;
-export const Types = T;
+
+// Expose Types.
+export namespace Types {
+  export type NextFunction = () => Promise<any>;
+  export type MiddlewareFunction = (ctx: any, next?: NextFunction) => any;
+  export type MiddlewareArg =
+    | MiddlewareFunction
+    | { stack: Stack; [x: string]: any }
+    | boolean
+    | void;
+
+  export interface Stack extends Array<any> {
+    [index: number]: MiddlewareArg | Stack;
+  }
+}
 
 /**
  * Chain a stack of rill middleware into one composed function.
  *
  * @param stack An array of middleware arguments to convert to a function.
  */
-function chain(stack: T.Stack) {
+export default function chain(stack: Types.Stack) {
   if (!Array.isArray(stack)) {
     throw new TypeError("Rill: Middleware stack must be an array.");
   }
 
-  const fns: T.MiddlewareFunction[] = normalize(stack, []);
+  const fns: Types.MiddlewareFunction[] = normalize(stack, []);
 
-  return (ctx?: any, next?: T.NextFunction) => {
+  return (ctx?: any, next?: Types.NextFunction) => {
     let index = -1; // Last called middleware.
     return dispatch(0);
     function dispatch(i: number): Promise<any> {
@@ -43,9 +55,9 @@ function chain(stack: T.Stack) {
  * @internal
  */
 function normalize(
-  stack: T.Stack,
-  fns: T.MiddlewareFunction[]
-): T.MiddlewareFunction[] {
+  stack: Types.Stack,
+  fns: Types.MiddlewareFunction[]
+): Types.MiddlewareFunction[] {
   for (const fn of stack) {
     if (!fn) {
       continue;

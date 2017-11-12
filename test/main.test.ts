@@ -1,10 +1,10 @@
 import * as assert from "assert";
-import chain from "../src";
+import chain, { Types as T } from "../src";
 
 describe("Chain", () => {
   it("should work", () => {
-    const result = [];
-    const middleware = [
+    const result: number[] = [];
+    const middleware: T.Stack = [
       function first(ctx, next) {
         result.push(1);
         next();
@@ -28,8 +28,8 @@ describe("Chain", () => {
   });
 
   it("should stop the chain without calling next", () => {
-    const result = [];
-    const middleware = [
+    const result: number[] = [];
+    const middleware: T.Stack = [
       function first(ctx, next) {
         result.push(1);
         next();
@@ -51,8 +51,8 @@ describe("Chain", () => {
   });
 
   it("should ignore false and nullish values", () => {
-    const result = [];
-    const middleware = [
+    const result: number[] = [];
+    const middleware: T.Stack = [
       function first(ctx, next) {
         result.push(1);
         next();
@@ -78,8 +78,8 @@ describe("Chain", () => {
   });
 
   it("should concat an object with a stack.", () => {
-    const result = [];
-    const app = {
+    const result: number[] = [];
+    const app: T.MiddlewareArg = {
       stack: [
         function first(ctx, next) {
           result.push(1);
@@ -99,7 +99,7 @@ describe("Chain", () => {
       ]
     };
 
-    const middleware = [
+    const middleware: T.Stack = [
       app,
       function fourth(ctx, next) {
         result.push(4);
@@ -114,8 +114,8 @@ describe("Chain", () => {
   });
 
   it("should flatten arrays of middleware.", () => {
-    const result = [];
-    const middleware = [
+    const result: number[] = [];
+    const middleware: T.Stack = [
       [
         function first(ctx, next) {
           result.push(1);
@@ -157,7 +157,7 @@ describe("Chain", () => {
   });
 
   it("should error when calling next multiple times.", () => {
-    const middleware = [
+    const middleware: T.Stack = [
       function first(ctx, next) {
         next();
         return next();
@@ -174,7 +174,7 @@ describe("Chain", () => {
   });
 
   it("should capture sync errors", () => {
-    const middleware = [
+    const middleware: T.Stack = [
       function first() {
         throw new Error("Failed");
       }
