@@ -1,7 +1,7 @@
 {
   "name": "@rill/chain",
   "description": "Compose all functions and Rill apps provided into a valid middleware.",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "bugs": "https://github.com/rill-js/chain/issues",
   "devDependencies": {
