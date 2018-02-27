@@ -22,7 +22,7 @@ describe("Chain", () => {
       }
     ];
 
-    return chain(middleware)().then(() => {
+    return chain(middleware)({}).then(() => {
       assert.deepEqual(result, [1, 2, 3, 4, 5, 6]);
     });
   });
@@ -45,7 +45,7 @@ describe("Chain", () => {
       }
     ];
 
-    return chain(middleware)().then(() => {
+    return chain(middleware)({}).then(() => {
       assert.deepEqual(result, [1, 2, 6]);
     });
   });
@@ -72,7 +72,7 @@ describe("Chain", () => {
       null
     ];
 
-    return chain(middleware)().then(() => {
+    return chain(middleware)({}).then(() => {
       assert.deepEqual(result, [1, 2, 3, 4, 5, 6]);
     });
   });
@@ -108,7 +108,7 @@ describe("Chain", () => {
       }
     ];
 
-    return chain(middleware)().then(() => {
+    return chain(middleware)({}).then(() => {
       assert.deepEqual(result, [1, 2, 3, 4, 5, 6, 7, 8]);
     });
   });
@@ -144,7 +144,7 @@ describe("Chain", () => {
       ]
     ];
 
-    return chain(middleware)().then(() => {
+    return chain(middleware)({}).then(() => {
       assert.deepEqual(result, [1, 2, 3, 4, 5, 6, 7, 8]);
     });
   });
@@ -164,7 +164,7 @@ describe("Chain", () => {
       }
     ];
 
-    return chain(middleware)()
+    return chain(middleware)({})
       .then(() => {
         assert.fail("Should have errored");
       })
@@ -180,7 +180,7 @@ describe("Chain", () => {
       }
     ];
 
-    return chain(middleware)()
+    return chain(middleware)({})
       .then(() => {
         assert.fail("Should have errored");
       })

@@ -4,14 +4,14 @@ module.exports = exports = chain;
 // Expose Types.
 export namespace Types {
   export type NextFunction = () => Promise<any>;
-  export type MiddlewareFunction = (ctx: any, next?: NextFunction) => any;
+  export type MiddlewareFunction = <T>(ctx: T, next?: NextFunction) => any;
   export type MiddlewareArg =
     | MiddlewareFunction
     | { stack: Stack; [x: string]: any }
     | boolean
     | void;
 
-  export interface Stack extends Array<any> {
+  export interface Stack extends Array<MiddlewareArg | Stack> {
     [index: number]: MiddlewareArg | Stack;
   }
 }
@@ -28,7 +28,7 @@ export default function chain(stack: Types.Stack) {
 
   const fns: Types.MiddlewareFunction[] = normalize(stack, []);
 
-  return (ctx?: any, next?: Types.NextFunction) => {
+  return <T>(ctx: T, next?: Types.NextFunction) => {
     let index = -1; // Last called middleware.
     return dispatch(0);
     function dispatch(i: number): Promise<any> {
