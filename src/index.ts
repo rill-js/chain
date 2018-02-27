@@ -4,15 +4,18 @@ module.exports = exports = chain;
 // Expose Types.
 export namespace Types {
   export type NextFunction = () => Promise<any>;
-  export type MiddlewareFunction = <T>(ctx: T, next?: NextFunction) => any;
-  export type MiddlewareArg =
-    | MiddlewareFunction
-    | { stack: Stack; [x: string]: any }
+  export type MiddlewareFunction<T = any> = (
+    ctx: T,
+    next?: NextFunction
+  ) => any;
+  export type MiddlewareArg<T = any> =
+    | MiddlewareFunction<T>
+    | { stack: Stack<T>; [x: string]: any }
     | boolean
     | void;
 
-  export interface Stack extends Array<MiddlewareArg | Stack> {
-    [index: number]: MiddlewareArg | Stack;
+  export interface Stack<T = any> extends Array<MiddlewareArg<T> | Stack<T>> {
+    [index: number]: MiddlewareArg<T> | Stack<T>;
   }
 }
 
@@ -21,14 +24,14 @@ export namespace Types {
  *
  * @param stack An array of middleware arguments to convert to a function.
  */
-export default function chain(stack: Types.Stack) {
+export default function chain<T = any>(stack: Types.Stack<T>) {
   if (!Array.isArray(stack)) {
     throw new TypeError("Rill: Middleware stack must be an array.");
   }
 
-  const fns: Types.MiddlewareFunction[] = normalize(stack, []);
+  const fns: Types.MiddlewareFunction<T>[] = normalize(stack, []);
 
-  return <T>(ctx: T, next?: Types.NextFunction) => {
+  return (ctx: T, next?: Types.NextFunction) => {
     let index = -1; // Last called middleware.
     return dispatch(0);
     function dispatch(i: number): Promise<any> {
@@ -54,17 +57,17 @@ export default function chain(stack: Types.Stack) {
  * @param fns The current list of normalized middleware functions.
  * @internal
  */
-function normalize(
-  stack: Types.Stack,
-  fns: Types.MiddlewareFunction[]
-): Types.MiddlewareFunction[] {
+function normalize<T = any>(
+  stack: Types.Stack<T>,
+  fns: Types.MiddlewareFunction<T>[]
+) {
   for (const fn of stack) {
     if (!fn) {
       continue;
     }
 
     if (typeof fn === "function") {
-      fns.push(fn);
+      fns.push(fn as Types.MiddlewareFunction<T>);
     } else if (Array.isArray(fn)) {
       normalize(fn, fns);
     } else if (Array.isArray((fn as any).stack)) {
